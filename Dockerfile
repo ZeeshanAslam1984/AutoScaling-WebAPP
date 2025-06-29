@@ -1,6 +1,6 @@
 FROM node
 WORKDIR /autoscaling-webapp
 COPY . . 
-EXPOSE 3000
+EXPOSE 80
 RUN npm install 
 CMD ["npm","start"]
