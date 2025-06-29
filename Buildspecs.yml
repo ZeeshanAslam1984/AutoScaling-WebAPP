@@ -10,7 +10,8 @@ phases:
       - docker tag my-webapp:latest <your-account-id>.dkr.ecr.us-east-1.amazonaws.com/my-webapp:latest
   post_build:
     commands:
-      - docker push <your-account-id>.dkr.ecr.us-east-1.amazonaws.com/my-webapp:latest
-      - printf '[{"name":"my-container","imageUri":"%s"}]' <your-account-id>.dkr.ecr.us-east-1.amazonaws.com/my-webapp:latest > imagedefinitions.json
+      - echo Writing image definitions...
+      - printf '[{"name":"webapp3","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+
 artifacts:
   files: imagedefinitions.json
