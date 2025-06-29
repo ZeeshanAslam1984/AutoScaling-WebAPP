@@ -18,12 +18,15 @@ phases:
       - echo "Building the Docker image..."
       - docker build -t webapp .
       - docker tag webapp:latest 677276091463.dkr.ecr.ap-northeast-1.amazonaws.com/webapp:latest
+
   post_build:
     commands:
       - echo "Pushing the Docker image to ECR..."
       - docker push 677276091463.dkr.ecr.ap-northeast-1.amazonaws.com/webapp:latest
+      - echo "Writing imagedefinitions.json..."
+      - printf '[{"name":"webapp","imageUri":"677276091463.dkr.ecr.ap-northeast-1.amazonaws.com/webapp:latest"}]' > imagedefinitions.json
       - echo "Build completed successfully"
 
 artifacts:
   files:
-    - '**/*'
+    - imagedefinitions.json
